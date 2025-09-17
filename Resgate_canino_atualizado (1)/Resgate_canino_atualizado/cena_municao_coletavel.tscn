@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://municao1.png.png" type="Texture" id=1]
+[ext_resource path="res://script_flecha_coletavel.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 54, 7 )
+
+[node name="FlechaColetavel" type="Node2D"]
+position = Vector2( 259, 134 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+position = Vector2( 9.50002, 7 )
+scale = Vector2( 0.134503, 0.0703235 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 185, 855, 711 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 5, 0 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="coletar_flecha"]

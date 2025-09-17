@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://flecha_hud.png" type="Texture" id=1]
+[ext_resource path="res://script_vida_coletavel.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.5, 29 )
+
+[node name="VidaColetavel" type="Node2D"]
+position = Vector2( 542, 325 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+position = Vector2( -1.52588e-05, 0 )
+scale = Vector2( 0.402685, 0.402685 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 57, 61, 159, 149 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="ganhar_vidas"]

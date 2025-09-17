@@ -1,0 +1,194 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://inimigomovs.png" type="Texture" id=1]
+[ext_resource path="res://script_inimigo.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 47.75, 68.5 )
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 429, 595, 332, 295 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "andando"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 117, 105, 363, 300 ), Rect2( 553, 107, 364, 301 ), Rect2( 1002, 112, 365, 292 ), Rect2( 1454, 118, 363, 293 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "atacando"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 20, 571, 355, 318 ), Rect2( 429, 595, 332, 295 ), Rect2( 810, 580, 415, 315 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "morrendo"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 1293, 679, 394, 212 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "destruir"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "parado"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 20, 571, 355, 318 ), Rect2( 429, 595, 332, 295 ), Rect2( 20, 571, 355, 318 ) ]
+}
+
+[node name="Inimigo" type="Node2D"]
+position = Vector2( 190, 131 )
+
+[node name="Inimigo" type="KinematicBody2D" parent="."]
+collision_layer = 8
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Inimigo"]
+position = Vector2( 25, 5.99999 )
+scale = Vector2( 0.356337, 0.547283 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 429, 595, 332, 295 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inimigo"]
+position = Vector2( 19.25, 15 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Inimigo"]
+autoplay = "parado"
+anims/RESET = SubResource( 5 )
+anims/andando = SubResource( 2 )
+anims/atacando = SubResource( 3 )
+anims/morrendo = SubResource( 6 )
+anims/parado = SubResource( 4 )
+
+[node name="RayCast2DMaoEsq" type="RayCast2D" parent="Inimigo"]
+position = Vector2( -35, 14 )
+rotation = -0.00983063
+scale = Vector2( 1.16784, 10.5655 )
+enabled = true
+cast_to = Vector2( -59.92, -0.254416 )
+collision_mask = 2
+
+[node name="RayCast2DMaoDir" type="RayCast2D" parent="Inimigo"]
+position = Vector2( 78, 11 )
+scale = Vector2( 1, 10.32 )
+enabled = true
+cast_to = Vector2( 64, -0.096899 )
+collision_mask = 2
+
+[node name="RayCast2DPeEsq" type="RayCast2D" parent="Inimigo"]
+position = Vector2( -16, 86 )
+rotation = -1.5708
+scale = Vector2( 1.16784, 10.5655 )
+enabled = true
+cast_to = Vector2( -33, 0 )
+
+[node name="RayCast2DPeDir" type="RayCast2D" parent="Inimigo"]
+position = Vector2( 60, 86 )
+rotation = 1.5708
+scale = Vector2( 1, 10.32 )
+enabled = true
+cast_to = Vector2( 35, 0 )
+
+[connection signal="animation_finished" from="Inimigo/AnimationPlayer" to="Inimigo" method="causar_dano"]
